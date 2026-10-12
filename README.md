@@ -162,8 +162,8 @@ npm install
 cp .env.example .env
 php artisan key:generate
 
-# Configurar banco PostgreSQL no .env e rodar migrations
-php artisan migrate
+# Configurar banco PostgreSQL no .env, rodar migrations e popular dados de demo
+php artisan migrate --seed
 
 # Link simbólico para anexos públicos
 php artisan storage:link
@@ -172,14 +172,22 @@ php artisan storage:link
 npm run dev
 ```
 
+Para **apenas refrescar** os dados de demonstração (mantém o schema):
+
+```bash
+php artisan db:seed
+```
+
 ### Acesso inicial
 
-Após as migrations, é criado um usuário administrador padrão:
+As migrations criam os grupos obrigatórios (`ADMIN`, `SUPORTE`, `USUARIOS`) e o administrador. O seeder popula projetos, tarefas, anotações e histórico de demonstração.
 
-| Campo | Valor |
-|-------|-------|
-| E-mail | `admin@admin.com` |
-| Senha | `admin` |
+| Perfil | E-mail | Senha |
+|--------|--------|-------|
+| Administrador | `admin@admin.com` | `admin` |
+| Suporte | `suporte@chamados.ti` | `password` |
+| Usuário | `ana.silva@chamados.ti` | `password` |
+| Usuário | `carlos.souza@chamados.ti` | `password` |
 
 Com [Laravel Herd](https://herd.laravel.com), o projeto pode ser acessado em `http://tickets.test`.
 

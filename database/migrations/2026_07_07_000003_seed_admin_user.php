@@ -12,13 +12,23 @@ return new class extends Migration
         if (! $groupId) {
             $groupId = DB::table('groups')->insertGetId([
                 'code' => 'ADMIN',
-                'description' => 'Administradores',
+                'description' => 'Administrador',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         }
 
-        if (! DB::table('users')->where('email', 'admin@admin.com')->exists()) {
+        $admin = DB::table('users')->where('email', 'admin@admin.com')->first();
+
+        if ($admin) {
+            DB::table('users')->where('id', $admin->id)->update([
+                'name' => 'Administrador',
+                'password' => bcrypt('admin'),
+                'group_id' => $groupId,
+                'is_active' => true,
+                'updated_at' => now(),
+            ]);
+        } else {
             DB::table('users')->insert([
                 'name' => 'Administrador',
                 'email' => 'admin@admin.com',

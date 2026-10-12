@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('migrate:fresh --seed --force')->dailyAt('00:01');
+        $schedule->command('migrate:fresh --seed --force')->dailyAt('12:01');
     }
 
     /**

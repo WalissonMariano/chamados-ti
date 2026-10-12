@@ -37,7 +37,7 @@ return new class extends Migration
         DB::table('groups')->whereIn('code', ['SUPORTE', 'USUARIOS'])->delete();
 
         DB::table('groups')->where('code', 'ADMIN')->update([
-            'description' => 'Administradores',
+            'description' => 'Administrador',
             'updated_at' => now(),
         ]);
     }
