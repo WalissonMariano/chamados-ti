@@ -39,6 +39,21 @@
                     </div>
                 @endif
 
+                <div class="login-demo">
+                    <strong>Acesso de demonstração</strong>
+                    <p>Use as credenciais abaixo para explorar o sistema:</p>
+                    <dl>
+                        <div>
+                            <dt>E-mail</dt>
+                            <dd><code>admin@admin.com</code></dd>
+                        </div>
+                        <div>
+                            <dt>Senha</dt>
+                            <dd><code>admin</code></dd>
+                        </div>
+                    </dl>
+                </div>
+
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
@@ -48,7 +63,7 @@
                             type="email"
                             id="email"
                             name="email"
-                            value="{{ old('email') }}"
+                            value="{{ old('email', 'admin@admin.com') }}"
                             placeholder="seu@email.com"
                             autocomplete="email"
                             required
@@ -66,6 +81,7 @@
                             type="password"
                             id="password"
                             name="password"
+                            value="admin"
                             placeholder="••••••••"
                             autocomplete="current-password"
                             required
